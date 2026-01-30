@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyxomorBook - Цифровая библиотека</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="icon.jpg">
+</head>
+<body>
+    
+    <!-- Зона активации по наведению на правый край (только для десктопов) -->
+    <div class="menu-hover-trigger" id="menuHoverTrigger"></div>
+    
+    <!-- Затемнение фона -->
+    <div class="mobile-menu-overlay" id="menuOverlay"></div>
+    
+    <!-- Выдвигающееся меню -->
+    <aside class="sidebar" id="mainSidebar">
+        <div class="main-menu">
+            <div class="menu-header">
+                <div class="menu-logo">
+                    <i class="fas fa-book"></i>
+                    <span>MyxomorBook</span>
+                </div>
+            </div>
+            
+            <div class="menu-category">Основное</div>
+            <a href="#home" class="menu-item-horizontal active" data-section="home">
+                <i class="fas fa-home"></i> Главная
+            </a>
+            <a href="#library" class="menu-item-horizontal" data-section="library">
+                <i class="fas fa-book-open"></i> Все книги
+            </a>
+            <a href="#friends" class="menu-item-horizontal" data-section="friends">
+                <i class="fas fa-user-friends"></i> Друзья
+            </a>
+            <a href="#messages" class="menu-item-horizontal" data-section="messages">
+                <i class="fas fa-envelope"></i> Сообщения
+            </a>
+            
+            <div class="menu-divider"></div>
+            
+            <div class="menu-category">Статистика</div>
+            <a href="#reading" class="menu-item-horizontal" data-section="reading">
+                <i class="fas fa-chart-line"></i> Статистика чтения
+            </a>
+            
+            <div class="menu-divider"></div>
+            
+            <div class="menu-category">Настройки</div>
+            <a href="#settings" class="menu-item-horizontal" data-section="settings">
+                <i class="fas fa-cog"></i> Настройки профиля
+            </a>
+            <a href="#profile" class="menu-item-horizontal" id="profileMenuBtn">
+                <i class="fas fa-user-edit"></i> Редактировать профиль
+            </a>
+            
+            <div class="menu-divider"></div>
+            
+            <div class="menu-category">Дополнительно</div>
+            <a href="#" class="menu-item-horizontal" id="notificationsMenuBtn">
+                <i class="fas fa-bell"></i> Уведомления
+                <span class="notification-badge mini">3</span>
+            </a>
+            <a href="#" class="menu-item-horizontal" id="helpMenuBtn">
+                <i class="fas fa-question-circle"></i> Помощь
+            </a>
+            <a href="#" class="menu-item-horizontal" id="themeMenuBtn">
+                <i class="fas fa-palette"></i> Сменить тему
+            </a>
+            
+            <div class="menu-divider"></div>
+            
+            <a href="#" class="menu-item-horizontal" id="logoutMenuBtn">
+                <i class="fas fa-sign-out-alt"></i> Выйти
+            </a>
+        </div>
+    </aside>
+
+    <!-- Кнопка вызова дополнительных меню в контенте -->
+    <button class="content-menu-btn" id="contentMenuBtn">
+        <i class="fas fa-ellipsis-v"></i> Меню
+    </button>
+    
+    <!-- Всплывающее меню в контенте -->
+    <div class="content-submenu" id="contentSubmenu">
+        <div class="submenu-header">Быстрые действия</div>
+        <div class="submenu-item" id="submenuNotifications">
+            <i class="fas fa-bell"></i> Уведомления
+        </div>
+        <div class="submenu-item" id="submenuHelp">
+            <i class="fas fa-question-circle"></i> Помощь
+        </div>
+        <div class="submenu-item" id="submenuTheme">
+            <i class="fas fa-palette"></i> Сменить тему
+        </div>
+        <div class="submenu-item" id="submenuProfile">
+            <i class="fas fa-user-edit"></i> Профиль
+        </div>
+        <div class="submenu-item" id="submenuSettings">
+            <i class="fas fa-cog"></i> Настройки
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Навигация -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-left">
+                    <button class="menu-toggle-btn" id="menuToggleBtn">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                    <div class="logo">
+                        <i class="fas fa-book"></i>
+                        <span>MyxomorBook</span>
+                    </div>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Поиск книг, авторов...">
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div class="nav-icons">
+                        <div class="nav-icon" id="homeBtn" title="Главная">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="nav-icon" id="friendsBtn" title="Друзья">
+                            <i class="fas fa-user-friends"></i>
+                            <span class="notification-badge">3</span>
+                        </div>
+                        <div class="nav-icon" id="messagesBtn" title="Сообщения">
+                            <i class="fas fa-envelope"></i>
+                            <span class="notification-badge">5</span>
+                        </div>
+                        <div class="nav-icon" id="readingTimeBtn" title="Время чтения">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="user-menu">
+                            <img src="https://ui-avatars.com/api/?name=Пользователь&background=6366f1&color=fff" alt="Аватар">
+                            <span>Пользователь</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Главный контент -->
+        <div class="main-content">
+            <!-- Боковая панель профиля -->
+            <aside class="sidebar-profile">
+                <div class="sidebar-section profile-section">
+                    <div class="profile-summary">
+                        <div class="level-badge" id="sidebarLevel">Уровень 1</div>
+                        <button class="btn-profile-edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <div class="profile-avatar">
+                            <img src="" alt="Аватар" id="sidebarAvatar">
+                            <div class="avatar-edit">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="online-indicator"></div>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="sidebarUsername">Загрузка...</h3>
+                            <p class="user-email" id="sidebarEmail">...</p>
+                            <div class="user-stats">
+                                <span><i class="fas fa-book"></i> <span id="sidebarBooks">0</span></span>
+                                <span><i class="fas fa-fire"></i> <span id="sidebarStreak">0д</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Друзья онлайн</h3>
+                    <div class="online-friends" id="onlineFriends">
+                        <div class="no-online">
+                            <i class="fas fa-user-slash"></i>
+                            <p>Нет друзей онлайн</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Статистика чтения</h3>
+                    <div class="reading-stats">
+                        <div class="stat">
+                            <span>Сегодня</span>
+                            <span class="stat-value" id="todayStat">0 мин</span>
+                        </div>
+                        <div class="stat">
+                            <span>За неделю</span>
+                            <span class="stat-value" id="weekStat">0 ч 0 мин</span>
+                        </div>
+                        <div class="stat">
+                            <span>Всего</span>
+                            <span class="stat-value" id="totalStat">0 ч</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Контент секции -->
+            <div class="content-section">
+                <!-- Главная страница -->
+                <section id="homeSection" class="section active">
+                    <div class="welcome-banner">
+                        <h1>Добро пожаловать в MyxomorBook</h1>
+                        <p>Цифровая библиотека киберпанк литературы</p>
+                    </div>
+
+                    <div class="featured-book">
+                        <h2>Книга недели</h2>
+                        <div class="book-card featured">
+                            <div class="book-cover">
+                                <div class="cover-content">
+                                    <h3>DES / DEATH</h3>
+                                    <p>Пророчество в Пустоте</p>
+                                </div>
+                            </div>
+                            <div class="book-info">
+                                <h3>DES / DEATH: Пророчество в Пустоте</h3>
+                                <p class="book-author">Автор: Myxomor</p>
+                                <p class="book-genre">Киберпанк • Психологический триллер</p>
+                                <p class="book-description">
+                                    История Дэниса Садрикова, ученого, попавшего в ловушку между мирами. Его сознание застряло в цифровом чистилище, где сны становятся реальностью, а реальность — кошмаром.
+                                </p>
+                                <div class="book-meta">
+                                    <span><i class="fas fa-book-open"></i> 10 глав</span>
+                                    <span><i class="fas fa-clock"></i> 1 ч 16 мин</span>
+                                </div>
+                                <a href="read.html" class="btn-read">Читать</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <div class="action-card">
+                            <i class="fas fa-search"></i>
+                            <h3>Поиск книг</h3>
+                            <p>Найдите свою следующую книгу</p>
+                        </div>
+                        <div class="action-card">
+                            <i class="fas fa-user-plus"></i>
+                            <h3>Добавить друзей</h3>
+                            <p>Найдите единомышленников</p>
+                        </div>
+                        <div class="action-card">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Статистика</h3>
+                            <p>Отслеживайте прогресс чтения</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Все книги -->
+                <section id="librarySection" class="section">
+                    <h2>Все книги</h2>
+                    <div class="books-grid">
+                        <div class="book-card-small" data-book="des-death">
+                            <div class="book-cover-small">
+                                <img src="assets/images/cover.jpg">
+                            </div>
+                            <div class="book-info-small">
+                                <h4>DES / DEATH: Пророчество в Пустоте</h4>
+                                <p class="book-author-small">Myxomor</p>
+                                <div class="book-actions">
+                                    <a href="read.html" class="btn-action" title="Читать">
+                                        <i class="fas fa-book-open"></i>
+                                    </a>
+                                    <button class="btn-action favorite-btn" title="В избранное">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Друзья -->
+                <section id="friendsSection" class="section">
+                    <div class="section-header">
+                        <h2>Друзья</h2>
+                        <button class="btn-add-friend"><i class="fas fa-user-plus"></i> Добавить друга</button>
+                    </div>
+
+                    <div class="search-friends">
+                        <input type="text" id="searchFriends" placeholder="Поиск друзей...">
+                        <button class="btn-search"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    <div class="friends-list" id="friendsListContainer">
+                        <div class="no-results">
+                            <i class="fas fa-user-friends"></i>
+                            <h3>Друзья не найдены</h3>
+                            <p>Начните добавлять друзей!</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Сообщения -->
+                <section id="messagesSection" class="section">
+                    <h2>Сообщения</h2>
+                    <div class="messages-container">
+                        <div class="conversations-list" id="conversationsList">
+                            <div class="conversation">
+                                <img src="https://ui-avatars.com/api/?name=Алексей&background=6366f1&color=fff" alt="Аватар">
+                                <div class="conversation-info">
+                                    <h4>Загрузка...</h4>
+                                    <p>Нет сообщений</p>
+                                    <span class="message-time"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-area">
+                            <div class="chat-header">
+                                <img src="https://ui-avatars.com/api/?name=Пользователь&background=6366f1&color=fff" alt="Аватар">
+                                <div>
+                                    <h4>Выберите диалог</h4>
+                                    <span class="user-status"></span>
+                                </div>
+                            </div>
+
+                            <div class="messages" id="chatMessages">
+                                <div class="no-messages">
+                                    <i class="fas fa-comments"></i>
+                                    <p>Выберите диалог для начала общения</p>
+                                </div>
+                            </div>
+
+                            <div class="message-input">
+                                <input type="text" id="messageInput" placeholder="Введите сообщение..." disabled>
+                                <button id="sendMessageBtn" disabled><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Статистика чтения -->
+                <section id="readingSection" class="section">
+                    <h2>Статистика чтения</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3><i class="fas fa-clock"></i> Общее время</h3>
+                            <p class="stat-number" id="totalTimeStat">0 часов</p>
+                            <p class="stat-desc">Всего прочитано</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3><i class="fas fa-book"></i> Книги</h3>
+                            <p class="stat-number" id="booksCompletedStat">0 книг</p>
+                            <p class="stat-desc">Завершено</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3><i class="fas fa-fire"></i> Серия дней</h3>
+                            <p class="stat-number" id="streakStat">0 дней</p>
+                            <p class="stat-desc">Подряд чтения</p>
+                        </div>
+                    </div>
+
+                    <div class="reading-history">
+                        <h3>История чтения</h3>
+                        <div class="history-item">
+                            <span>DES / DEATH: Пророчество в Пустоте</span>
+                            <span id="todayReadingTime">0 мин сегодня</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Настройки -->
+                <section id="settingsSection" class="section">
+                    <h2>Настройки профиля</h2>
+                    <div class="settings-grid">
+                        <div class="setting-card">
+                            <h3><i class="fas fa-user"></i> Профиль</h3>
+                            <div class="setting-item">
+                                <label>Имя пользователя</label>
+                                <input type="text" id="usernameInput" placeholder="Ваш username" class="setting-input" data-setting="username">
+                            </div>
+                            <div class="setting-item">
+                                <label>Email</label>
+                                <input type="email" id="emailInput" placeholder="your@email.com" class="setting-input" data-setting="email" disabled>
+                                <small style="color: #6b7280; font-size: 0.85rem;">Email нельзя изменить</small>
+                            </div>
+                        </div>
+
+                        <div class="setting-card">
+                            <h3><i class="fas fa-palette"></i> Внешний вид</h3>
+                            <div class="setting-item">
+                                <label>Тема</label>
+                                <select id="themeSelect" class="setting-input" data-setting="theme">
+                                    <option value="dark">Темная</option>
+                                    <option value="light">Светлая</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Размер шрифта</label>
+                                <select id="fontSizeSelect" class="setting-input" data-setting="fontSize">
+                                    <option value="small">Маленький</option>
+                                    <option value="medium">Средний</option>
+                                    <option value="large">Большой</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-card">
+                            <h3><i class="fas fa-bell"></i> Уведомления</h3>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="notifyMessages" data-setting="notifyMessages">
+                                    Новые сообщения
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="notifyActivity" data-setting="notifyActivity">
+                                    Активность друзей
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="notifyNewBooks" data-setting="notifyNewBooks">
+                                    Новые книги
+                                </label>
+                            </div>
+                            <button class="btn-save-s setting-input" id="saveSettingsBtn">Сохранить настройки</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно добавления друга -->
+    <div id="addFriendModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Добавить друга</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="friendModalBody">
+                <div class="friend-requests">
+                    <h4>Отправить заявку в друзья</h4>
+                    <input type="text" id="friendUsernameInput" placeholder="Имя пользователя" class="modal-input">
+                    <button class="btn-send-request" onclick="sendFriendRequest()">Отправить запрос</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно редактирования профиля -->
+    <div id="profileModal" class="modal profile-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Редактирование профиля</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form class="profile-form">
+                    <div class="avatar-upload">
+                        <div class="avatar-preview">
+                            <img id="avatarPreview" src="" alt="Аватар">
+                        </div>
+                        <label for="avatarUpload" class="btn-avatar-upload ">
+                            <i class="fas fa-camera"></i>
+                            Сменить аватар
+                        </label>
+                        <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileUsername">Имя пользователя</label>
+                        <input type="text" id="profileUsername" class="form-input" placeholder="Ваше имя">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileFullName">Полное имя</label>
+                        <input type="text" id="profileFullName" class="form-input" placeholder="Имя и фамилия">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileEmail">Email</label>
+                        <input type="email" id="profileEmail" class="form-input" disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileBio">О себе</label>
+                        <textarea id="profileBio" class="form-input" rows="1" 
+                                  placeholder="Расскажите о себе..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Отмена</button>
+                        <button type="button" class="btn-save" id="saveProfileBtn">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомления -->
+    <div id="notificationContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>

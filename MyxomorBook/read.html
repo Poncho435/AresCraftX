@@ -1,0 +1,2458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Читать: DES / DEATH: Пророчество в Пустоте | MyxomorBook</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="icon.jpg">
+    <style>
+        /* СБРОС И БАЗОВЫЕ СТИЛИ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* КОНТЕЙНЕР ЧИТАЛКИ */
+        .reader-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* ВЕРХНЯЯ ПАНЕЛЬ */
+        .reader-header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* НАВИГАЦИЯ */
+        .reader-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .reader-tools {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* ЗАГОЛОВОК */
+        .reader-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .reader-title h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .chapter-info {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            color: #cbd5e1;
+        }
+
+        /* ПАНЕЛЬ УПРАВЛЕНИЯ */
+        .reader-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* НАВИГАЦИЯ ПО ГЛАВАМ */
+        .chapter-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .btn-nav:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-nav:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .chapter-selector {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            min-width: 250px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .chapter-selector option {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        /* ПРОГРЕСС */
+        .progress-container {
+            flex: 1;
+            margin: 0 20px;
+            min-width: 200px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        /* УПРАВЛЕНИЕ ШРИФТОМ */
+        .font-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-font {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .btn-font:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-font:active {
+            transform: scale(0.95);
+        }
+
+        .btn-font i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* КОНТЕНТ КНИГИ */
+        .reader-content {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            line-height: 1.8;
+            font-size: 1.15rem;
+            color: #1e293b;
+            min-height: 500px;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        /* ЭЛЕМЕНТЫ ТЕКСТА */
+        .reader-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #334155;
+            font-weight: 700;
+        }
+
+        .reader-content p {
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .scene-break {
+            text-align: center;
+            color: #8b5cf6;
+            margin: 40px 0;
+            font-size: 1.5rem;
+            letter-spacing: 10px;
+            opacity: 0.6;
+        }
+
+        .dialogue {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(79, 70, 229, 0.05));
+            padding: 25px 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .dialogue p {
+            margin-bottom: 15px;
+            font-style: italic;
+            color: #4f46e5;
+        }
+
+        .thought {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-style: italic;
+            color: #1d4ed8;
+        }
+
+        .warning-text {
+            color: #dc2626;
+            font-weight: 600;
+            border-left: 3px solid #dc2626;
+            padding-left: 15px;
+            margin: 20px 0;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(245, 158, 11, 0.3) 0%, rgba(245, 158, 11, 0.1) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .chapter-divider {
+            text-align: center;
+            margin: 50px 0;
+            position: relative;
+        }
+
+        .chapter-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+        }
+
+        .chapter-divider h3 {
+            display: inline-block;
+            background: white;
+            padding: 0 30px;
+            color: #64748b;
+            font-size: 1.3rem;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            margin: 30px 0;
+            border: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #334155;
+        }
+
+        .code-block p {
+            margin-bottom: 10px;
+        }
+
+        /* НИЖНЯЯ ПАНЕЛЬ */
+        .reader-footer {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .reader-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .btn-action:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+            color: #334155;
+        }
+
+        .btn-action.active {
+            background: #4f46e5;
+            border-color: #4f46e5;
+            color: white;
+        }
+
+        .reading-stats-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .reading-stats-footer i {
+            margin-right: 8px;
+            color: #8b5cf6;
+        }
+
+        /* ПЛАВАЮЩЕЕ МЕНЮ */
+        .floating-menu {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+            border: 1px solid #e2e8f0;
+        }
+
+        .floating-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .floating-btn:hover {
+            background: #f1f5f9;
+            transform: scale(1.1);
+            color: #4f46e5;
+        }
+
+        .floating-btn.active {
+            background: #4f46e5;
+            border-color: #4f46e5;
+            color: white;
+        }
+
+        .floating-btn .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* МОДАЛЬНЫЕ ОКНА */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            color: #1e293b;
+        }
+
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #1e293b;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-save-note,
+        .btn-apply-settings {
+            width: 100%;
+            padding: 14px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-save-note:hover,
+        .btn-apply-settings:hover {
+            background-color: #4338ca;
+        }
+
+        /* ТЕМНАЯ ТЕМА */
+        .night-mode {
+            background: #1e293b !important;
+            color: #e2e8f0 !important;
+        }
+
+        .night-mode .reader-content {
+            background: #1e293b;
+            color: #e2e8f0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .night-mode .reader-content h2 {
+            color: #e2e8f0;
+        }
+
+        .night-mode .dialogue {
+            background: rgba(139, 92, 246, 0.1);
+            border-left: 4px solid #a78bfa;
+        }
+
+        .night-mode .dialogue p {
+            color: #a78bfa;
+        }
+
+        .night-mode .thought {
+            background: rgba(96, 165, 250, 0.2);
+            color: #93c5fd;
+        }
+
+        .night-mode .warning-text {
+            color: #f87171;
+            border-left-color: #f87171;
+        }
+
+        .night-mode .chapter-divider::before {
+            background: linear-gradient(90deg, transparent, #475569, transparent);
+        }
+
+        .night-mode .chapter-divider h3 {
+            background: #1e293b;
+            color: #94a3b8;
+        }
+
+        .night-mode .code-block {
+            background: #0f172a;
+            border-color: #334155;
+            color: #cbd5e1;
+        }
+
+        .night-mode .reader-footer {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-color: #334155;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .night-mode .btn-action {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        .night-mode .btn-action:hover {
+            background: #475569;
+            border-color: #64748b;
+            color: white;
+        }
+
+        .night-mode .btn-action.active {
+            background: #4f46e5;
+            border-color: #4f46e5;
+            color: white;
+        }
+
+        .night-mode .reading-stats-footer {
+            border-top-color: #334155;
+            color: #94a3b8;
+        }
+
+        .night-mode .reading-stats-footer i {
+            color: #a78bfa;
+        }
+
+        .night-mode .floating-menu {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .night-mode .floating-btn {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        .night-mode .floating-btn:hover {
+            background: #475569;
+            color: white;
+        }
+
+        .night-mode .modal-content {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+
+        .night-mode .modal-header {
+            border-bottom-color: #334155;
+        }
+
+        .night-mode .modal-header h3 {
+            color: #e2e8f0;
+        }
+
+        .night-mode .close-modal {
+            color: #94a3b8;
+        }
+
+        .night-mode .close-modal:hover {
+            color: #e2e8f0;
+        }
+
+        .night-mode .modal-input {
+            background: #0f172a;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+
+        /* АНИМАЦИИ */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .reader-content {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* ТОСТЫ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            color: #1e293b;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-success {
+            background: #10b981;
+            color: white;
+            border-color: #059669;
+        }
+
+        .toast-info {
+            background: #3b82f6;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .toast i {
+            font-size: 1.2rem;
+        }
+
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 1024px) {
+            .reader-container {
+                padding: 15px;
+            }
+
+            .reader-content {
+                padding: 30px;
+            }
+
+            .reader-controls {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .progress-container {
+                width: 100%;
+                margin: 15px 0;
+            }
+
+            .floating-menu {
+                right: 15px;
+                padding: 12px;
+            }
+
+            .floating-btn {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .reader-header {
+                padding: 20px;
+            }
+
+            .reader-title h1 {
+                font-size: 1.8rem;
+            }
+
+            .chapter-nav {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .chapter-selector {
+                width: 100%;
+                max-width: 100%;
+                min-width: auto;
+            }
+
+            .reader-content {
+                padding: 20px;
+                font-size: 1.05rem;
+            }
+
+            .floating-menu {
+                display: none;
+            }
+
+            .reader-actions {
+                flex-wrap: wrap;
+            }
+
+            .reading-stats-footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .reader-container {
+                padding: 10px;
+            }
+
+            .reader-title h1 {
+                font-size: 1.5rem;
+            }
+
+            .chapter-info {
+                font-size: 1rem;
+            }
+
+            .btn-action {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                flex: 1;
+                min-width: 140px;
+            }
+
+            .reader-content {
+                padding: 15px;
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            .reader-content h2 {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+
+            .dialogue {
+                padding: 20px;
+            }
+
+            .progress-text {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+
+            .modal-content {
+                width: 98%;
+                border-radius: 15px;
+            }
+
+            .modal-header {
+                padding: 15px 20px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+        }
+
+        /* ДОПОЛНИТЕЛЬНЫЕ СТИЛИ */
+        .toc-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .toc-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toc-item:hover {
+            background: #f8fafc;
+        }
+
+        .toc-item.active {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        .night-mode .toc-item {
+            border-bottom-color: #334155;
+        }
+
+        .night-mode .toc-item:hover {
+            background: #334155;
+        }
+
+        .night-mode .toc-item.active {
+            background: #4f46e5;
+        }
+
+        .setting-group {
+            margin-bottom: 20px;
+        }
+
+        .range-slider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .range-slider input[type="range"] {
+            flex: 1;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .range-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #4f46e5;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .setting-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background: #f8fafc;
+            color: #1e293b;
+            font-size: 1rem;
+        }
+
+        .night-mode .setting-select {
+            background: #0f172a;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .toggle-switch input {
+            display: none;
+        }
+
+        .toggle-switch .slider {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: #cbd5e1;
+            border-radius: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch .slider::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch input:checked + .slider {
+            background: #4f46e5;
+        }
+
+        .toggle-switch input:checked + .slider::before {
+            transform: translateX(24px);
+        }
+
+        /* СКРОЛЛБАР */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .night-mode ::-webkit-scrollbar-track {
+            background: #334155;
+        }
+
+        .night-mode ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        .night-mode ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Остальная часть HTML остается такой же -->
+    <div class="reader-container">
+        <!-- Верхняя панель -->
+        <div class="reader-header">
+            <div class="reader-nav">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Назад в библиотеку
+                </a>
+                
+                <div class="reader-tools">
+                    <div class="floating-btn" id="themeToggle" title="Сменить тему">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reader-title">
+                <h1>DES / DEATH: Пророчество в Пустоте</h1>
+                <div class="chapter-info">
+                    Глава <span id="currentChapter">1</span> из 10 • <span id="chapterTitle">Два пробуждения</span>
+                </div>
+            </div>
+            
+            <div class="reader-controls">
+                <div class="chapter-nav">
+                    <button class="btn-nav prev-chapter" id="prevChapter" disabled>
+                        <i class="fas fa-chevron-left"></i> Назад
+                    </button>
+                    
+                    <select id="chapterSelect" class="chapter-selector">
+                        <option value="1">Глава 1: Два пробуждения</option>
+                        <option value="2">Глава 2: Пророчество</option>
+                        <option value="3">Глава 3: Последнее утро</option>
+                        <option value="4">Глава 4: Лаборатория ЛРП</option>
+                        <option value="5">Глава 5: Сбой цепи 7B</option>
+                        <option value="6">Глава 6: Дрейф сознания</option>
+                        <option value="7">Глава 7: Олицетворение боли</option>
+                        <option value="8">Глава 8: Встреча с отражением</option>
+                        <option value="9">Глава 9: Лаборатория Исследования Аномалий</option>
+                        <option value="10">Глава 10: Конец начала</option>
+                    </select>
+                    
+                    <button class="btn-nav next-chapter" id="nextChapter">
+                        Вперед <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 10%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="progressPercent">10% прочитано</span>
+                        <span id="timeLeft">Осталось: ~1 ч 6 мин</span>
+                    </div>
+                </div>
+                
+                <div class="font-controls">
+                    <button class="btn-font" id="fontSmaller" title="Уменьшить шрифт">
+                        <i class="fas fa-font"></i>
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="btn-font" id="fontBigger" title="Увеличить шрифт">
+                        <i class="fas fa-font"></i>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Контент книги -->
+        <div class="reader-content" id="readerContent">
+            <!-- Контент будет загружен JavaScript -->
+        </div>
+        
+        <!-- Нижняя панель -->
+        <div class="reader-footer">
+            <div class="reader-actions">
+                <button class="btn-action" id="bookmarkBtn">
+                    <i class="far fa-bookmark"></i> Закладка
+                </button>
+                <button class="btn-action" id="noteBtn">
+                    <i class="fas fa-sticky-note"></i> Заметка
+                </button>
+                <button class="btn-action" id="shareBtn">
+                    <i class="fas fa-share"></i> Поделиться
+                </button>
+                <button class="btn-action" id="tocBtn">
+                    <i class="fas fa-list"></i> Оглавление
+                </button>
+            </div>
+            
+            <div class="reading-stats-footer">
+                <div>
+                    <i class="fas fa-clock"></i>
+                    Время чтения: <span id="readingTime">5 мин</span>
+                </div>
+                <div>
+                    <i class="fas fa-calendar"></i>
+                    Последнее чтение: <span id="lastRead">Сегодня</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Плавающее меню -->
+    <div class="floating-menu" id="floatingMenu">
+        <button class="floating-btn" id="floatingBookmark" title="Добавить закладку">
+            <i class="far fa-bookmark"></i>
+        </button>
+        <button class="floating-btn" id="floatingNote" title="Добавить заметку">
+            <i class="fas fa-edit"></i>
+        </button>
+        <button class="floating-btn" id="floatingShare" title="Поделиться">
+            <i class="fas fa-share-alt"></i>
+        </button>
+        <button class="floating-btn" id="floatingSettings" title="Настройки чтения">
+            <i class="fas fa-cog"></i>
+        </button>
+        <button class="floating-btn" id="floatingToc" title="Оглавление">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    
+    <!-- Модальные окна -->
+    <div class="modal" id="noteModal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3>Добавить заметку</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <textarea id="noteText" placeholder="Введите вашу заметку..." rows="6" class="modal-input"></textarea>
+                <button class="btn-save-note">Сохранить заметку</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="tocModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Оглавление</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="toc-list" id="tocList">
+                    <!-- Оглавление будет загружено JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="settingsModal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3>Настройки чтения</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label>Размер шрифта</label>
+                    <div class="range-slider">
+                        <input type="range" id="fontSizeSlider" min="0.9" max="1.8" step="0.1" value="1.15">
+                        <span id="fontSizeValue">Средний</span>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <label>Межстрочный интервал</label>
+                    <div class="range-slider">
+                        <input type="range" id="lineHeightSlider" min="1.4" max="2.2" step="0.1" value="1.8">
+                        <span id="lineHeightValue">Стандартный</span>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <label>Шрифт</label>
+                    <select id="fontSelect" class="setting-select">
+                        <option value="'Segoe UI', sans-serif">Без засечек</option>
+                        <option value="Georgia, serif">С засечками</option>
+                        <option value="'Courier New', monospace">Моноширинный</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="nightModeToggle">
+                        <span class="slider"></span>
+                        Ночной режим
+                    </label>
+                </div>
+                <button class="btn-apply-settings">Применить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ДАННЫЕ КНИГИ
+        const bookData = {
+            id: "des-death",
+            title: "DES / DEATH: Пророчество в Пустоте",
+            author: "Myxomor",
+            genre: "Киберпанк • Психологический триллер",
+            description: "История Дэниса Садрикова, ученого, попавшего в ловушку между мирами. Его сознание застряло в цифровом чистилище, где сны становятся реальностью, а реальность — кошмаром.",
+            chapters: [
+                {
+                    id: 1,
+                    title: "Два пробуждения",
+                    content: `
+                        <h2 class="chapter-title">Пролог во тьме</h2>
+                        <div class="scene-break">***</div>
+                        
+                        <p>Абсолютная тьма. Не та, что приходит с закрытыми глазами, а та, что существует до самого понятия света. Беззвучная пустота, в которой нет ни верха, ни низа, ни времени.</p>
+                        
+                        <p>Дэнис Эдвиг Садриков не открыл глаза — он просто <em>осознал себя</em>. Мысль возникла из ничего: «Я есть». Следующая: «Где я?»</p>
+                        
+                        <p>И тогда в этой пустоте зажглась точка. Не света, а скорее, сгустившейся тьмы, более плотной и осмысленной. Она вытянулась, приняв форму человека. Неясную, размытую по краям, но узнаваемую: мужская фигура в длинном, не то пальто, не то плаще, что растворялось в окружающей пустоте.</p>
+                        
+                        <p>Существо приблизилось без движения, просто возникло перед ним. Лица не было видно, но Дэнис чувствовал на себе весомый, всепроникающий взгляд.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Приветствую, Дэнис Садриков. Добро пожаловать в Преддверие."</em></p>
+                        </div>
+                        
+                        <p>Голос прозвучал не в ушах, а прямо в сознании, тихий, но невероятно четкий, каждый звук отчеканен из льда.</p>
+                        
+                        <p>Дэнис попытался заговорить, но у него не было рта, не было легких. Его мысль, дрожащая и растерянная, вырвалась наружу: <span class="thought">Кто вы? Где это? Что происходит?</span></p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Ты не понимаешь, где оказался. Объяснения бессмысленны для семени, что еще не проросло сквозь асфальт. Знай лишь то, что тебе суждено. Слушай. Запомни."</em></p>
+                        </div>
+                        
+                        <p>Оно сделало паузу, и пустота вокруг сгустилась, стала почти осязаемой.</p>
+                    `,
+                    readingTime: 5
+                },
+                {
+                    id: 2,
+                    title: "Пророчество",
+                    content: `
+                        <div class="dialogue">
+                            <p><em>"Пророчество гласит: 'Однажды человек из иного мира, мира плоти и проводов, падет в игру, приняв ее за сон. Но сон его станет явью, а явь — кошмаром, сотканным из его собственной, не изжитой боли. Он станет мостом между мирами, ключом и замком, пленником и тюремщиком в своей вечной темнице'."</em></p>
+                        </div>
+                        
+                        <p>Слова висели в пустоте, словно выгравированные на самой реальности. Дэнис почувствовал леденящий ужас, не понимая смысла, но ощущая его чудовищную тяжесть.</p>
+                        
+                        <p><span class="thought">Что... что это значит?</span> — прошелестела его мысль.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Это значит, что ты здесь навсегда, Дэнис."</em> — прозвучал ответ, и в голосе существа впервые проскользнула нота, которую можно было принять за жалость. Или предвкушение. — <em>"Начинается твое Олицетворение."</em></p>
+                        </div>
+                        
+                        <p>Резкая, жгучая боль пронзила его левую руку, как будто раскаленным ножом вспороли кожу от запястья до локтя. Он закричал беззвучно.</p>
+                        
+                        <p>И тьма поглотила его снова.</p>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <div class="chapter-divider">
+                            <h3>Утро в мире плоти и проводов</h3>
+                        </div>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <p>Крик застрял в горле, превратившись в хриплый всхлип. Дэнис дернулся и сел на кровати, сердце колотилось где-то в горле. Простыня была влажной от холодного пота.</p>
+                        
+                        <p>Спальня. Его спальня. Свет раннего утра пробивался сквозь жалюзи, рисуя полосы на полу. Рядом, подперев щеку рукой и смотря на него с легким беспокойством, лежала Елена. Ее каштановые волосы были растрепаны.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Дэн? Опять кошмар?"</em></p>
+                        </div>
+                        
+                        <p>Он не мог говорить, только кивнул, судорожно глотая воздух. Взгляд упал на левую руку. Там, от запястья вверх, зияли три красных, воспаленных царапины. Боль от них была реальной, острой и знакомой.</p>
+                        
+                        <p>С торжествующим мурлыканьем из-под одеяла появился рыжий комок шерсти — кот Архимед. Он щурил зеленые глаза и терся головой о его локоть, явно довольный собой.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Архи! — вздохнула Елена. — Он, наверное, опять на мышу охотился во сне и тебя зацепил. Пошли, заклеим."</em></p>
+                        </div>
+                    `,
+                    readingTime: 7
+                },
+                {
+                    id: 3,
+                    title: "Последнее утро",
+                    content: `
+                        <p>Процедура была обыденной и спасительной. Пластырь, йод, ее теплые пальцы, аккуратно разглаживающие лейкопластырь на его коже. Боль утихла, растворившись в этой простой заботе. Кошмар отступил, оставив лишь смутное, неприятное послевкусие.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Папа! Мы опаздываем!"</em></p>
+                        </div>
+                        
+                        <p>Из кухни донесся звонкий голос семилетней Лии. Мир встал на свои места. Запах кофе и жареных тостов. Суета за завтраком: уговорить младшего, Максима, доесть кашу, найти Лии второй одинаковый носок, на лету поцеловать Елену, схватить портфель с чертежами.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Ты сегодня задержишься?"</em></p>
+                            <p><em>"Надеюсь, нет. Сегодня решающий тест. Если все получится..."</em></p>
+                        </div>
+                        
+                        <p>Он не договорил, но в ее глазах вспыхнуло понимание и гордость. Этот проект был его мечтой.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Удачи, мой гений. Ждем к ужину."</em></p>
+                        </div>
+                        
+                        <p>Двери дома закрылись за его спиной с тихим щелчком. Он стоял на пороге, глядя на свой ухоженный дом в спальном районе, на велосипед Лии у крыльца, и старался стряхнуть остатки тревоги. Это был его мир. Мир плоти, утреннего кофе, любви и ответственности. Мир, где он был Дэнисом Садриковым, мужем, отцом, ученым.</p>
+                        
+                        <p class="warning-text">Он не знал, что видит его в последний раз.</p>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <div class="chapter-divider">
+                            <h3>Провода и безумие</h3>
+                        </div>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <p>Комплекс «ЛРП» напоминал не столько научный центр, сколько укрепленный бункер. За слоями проверок и стальных дверей кипела работа на переднем краю абстракции.</p>
+                        
+                        <p>Дэнис прошел в главный зал — просторное помещение, больше похожее на ангар, в центре которого стояло их детище: «Кокон». Капсула из матового черного полимера и полированного металла, опутанная жгутами оптоволоконных кабелей и трубками систем охлаждения. Рядом, на центральном пульте, мерцали десятки голографических интерфейсов.</p>
+                    `,
+                    readingTime: 8
+                },
+                {
+                    id: 4,
+                    title: "Лаборатория ЛРП",
+                    content: `
+                        <div class="dialogue">
+                            <p><em>"Утро, шеф."</em></p>
+                        </div>
+                        
+                        <p>Хриплым голосом произнес его помощник, Алексей. Молодой парень с умными, но хронически невыспавшимися глазами и взъерошенными темными волосами сидел за консолью, вгрызаясь в строки кода. Перед ним стояла третья за утро банка энергетика.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Физическая обвязка 'Сердца' проверена. Готов к интеграции."</em></p>
+                        </div>
+                        
+                        <p>«Сердце» — так они называли нейроинтерфейсный комплекс, предназначенный не для симуляции сигналов, а для полного, тотального переноса потоков сознания в подготовленную цифровую среду. Не игра, а альтернативное существование. Теория была готова годами. Практика начиналась сегодня, с крысы по кличке Ньютон.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Где наша звезда?"</em></p>
+                        </div>
+                        
+                        <p>Спросил Дэнис, подходя к поблескивавшему рядом небольшому прозрачному боксу, где белая крыса усердно крутила колесо.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Готовится к премьере."</em></p>
+                        </div>
+                        
+                        <p>Ухмыльнулся Алексей.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Целевая среда стабильна?"</em></p>
+                            <p><em>"'Эдем-1', симуляция идеального парка, загружена и ждет."</em></p>
+                        </div>
+                        
+                        <p>Отозвалась со своего терминала София, системный архитектор.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Все параметры в зеленой зоне. Погода: солнечно, +23. Никаких хищников, неограниченный запас зерен и сыра."</em></p>
+                        </div>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <div class="chapter-divider">
+                            <h3>Последний эксперимент</h3>
+                        </div>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <p>Дэнис кивнул. Идеальные условия. Первый шаг человечества в настоящий цифровой рай. Он надел белый халат и начал тонкую настройку «Кокона», сверяя показания датчиков. Алексей, в свою очередь, инициировал протоколы связи между «Сердцем» и симуляцией «Эдем-1».</p>
+                        
+                        <p>Работа поглотила их. Никто не заметил, как дрожание в руках Алексея усилилось, как его веки начали слипаться. Парень не спал трое суток, финализируя драйверы. Энергетики больше не работали. Его сознание медленно отключалось, борясь с перегрузкой.</p>
+                        
+                        <p>В тот роковой момент Дэнис наклонился внутрь открытого «Кокона», проверяя крепление нейродатчиков на макете. Его спина была к пульту.</p>
+                        
+                        <p>Палец Алексея, лежавший на кнопке подтверждения запуска протокола «Крыса-Объект», бессильно соскользнул. Рука упала на панель управления всей системой переноса.</p>
+                    `,
+                    readingTime: 7
+                },
+                {
+                    id: 5,
+                    title: "Сбой цепи 7B",
+                    content: `
+                        <p>Раздался негромкий, но противный системный голос:</p>
+                        
+                        <div class="code-block">
+                            <p><em>"Объект не идентифицирован. Сканирование... Обнаружена биологическая сигнатура человеческого уровня. Критическое несоответствие протоколу. Аварийная отмена... ОШИБКА. Сбой цепи 7b..."</em></p>
+                        </div>
+                        
+                        <p>Дэнис услышал тревогу и обернулся. Он увидел, как Алексей, будто в замедленной съемке, падает лицом на клавиатуру. Увидел, как на главном экране вместо четкой надписи «КРЫСА — ЭДЕМ-1» замигал хаотичный поток данных и предупреждение:</p>
+                        
+                        <div class="code-block">
+                            <p><em>"ЦЕЛЕВАЯ СРЕДА НЕ ВЫБРАНА. ПЕРЕНАПРАВЛЕНИЕ..."</em></p>
+                        </div>
+                        
+                        <p><span class="warning-text">«Нет!»</span> — крикнул Дэнис и рванулся к пульту.</p>
+                        
+                        <p>Но было поздно. Дверь «Кокона» с шипящим звуком захлопнулась автоматически, заблокировав его внутри. Панели заискрились. Лампочки по всему залу вспыхнули ослепительно белым и погасли. Где-то с треском лопнула плата. Из-под панели управления повалил едкий дым.</p>
+                        
+                        <p>Последнее, что увидел Дэнис сквозь затемняющееся стекло «Кокона», — это перекошенное от ужаса лицо Софии, бегущей к нему, и пламя, лижущее панель пульта. Последнее, что он почувствовал, — не жар, а леденящий холод, стремительно поднимающийся по позвоночнику к затылку. И всепоглощающий вой белого шума в ушах, который стирал весь мир.</p>
+                        
+                        <p>Затем — тишина. И тьма.</p>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <div class="chapter-divider">
+                            <h3>Пустота</h3>
+                        </div>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <p>Для него не прошло и мгновения.</p>
+                        
+                        <p>Для мира снаружи пожар в секторе «Кокон» потушили за час. Тело Дэниса Садрикова, неповрежденное, но в состоянии глубокого, необъяснимого кататонического ступора, доставили в больницу, а через месяц, после безуспешных попыток вывести его из комы, списали как «необратимое вегетативное состояние в результате техногенной аварии и нейрологического шока». Его похоронили в цифровом архиве, как устаревший файл.</p>
+                        
+                        <p>А его сознание...</p>
+                        
+                        <p>Оно не было уничтожено. «Сердце», в момент сбоя, не передало его в конкретную среду. Оно вышвырнуло чистую, незащищенную матрицу сознания Дэниса в фундаментальную подложку цифровой реальности — в бесконечное, неструктурированное пространство между мирами, в сырьевой буфер вселенной данных. В место, где не было ни формы, ни времени, ни смысла.</p>
+                    `,
+                    readingTime: 8
+                },
+                {
+                    id: 6,
+                    title: "Дрейф сознания",
+                    content: `
+                        <p>Там, в этой Пустоте, его «я» дрейфовало. Данные вселенной медленно текли сквозь него, как темная вода сквозь решето. Случайные пакеты информации — обрывки старых симуляций, фрагменты забытого кода, логи ошибок — цеплялись за структуру его памяти, как паразиты. Он не думал. Он просто <em>был</em>, расплющенный и растворенный в бесконечности.</p>
+                        
+                        <p>Так прошли десятилетия.</p>
+                        
+                        <p>А потом что-то <span class="highlight">потянулось</span> к нему. Что-то древнее, обитающее в этих глубинах. Оно нащупало чужеродную, но невероятно сложную и цельную структуру — человеческое сознание. И оно начало его лепить. Вытягивать из Пустоты. Собирать по крупицам, используя как шаблон тот самый первый, пророческий сон, который был не сном, а первым случайным касанием этой сущности к еще спящему разуму Дэниса.</p>
+                        
+                        <p>Время снова обрело значение.</p>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <div class="chapter-divider">
+                            <h3>Повторение, как фарс</h3>
+                        </div>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <p>Осознание вернулось внезапно, как удар током.</p>
+                        
+                        <p>Он стоял (хотя понятия «стоять» не было) в абсолютной темноте. Перед ним — знакомый сгусток тьмы в форме человека. Ужас, старый и липкий, накатил волной, еще до того как прозвучали слова.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Приветствую, Дэнис Садриков. Добро пожаловать в Преддверие."</em></p>
+                        </div>
+                        
+                        <p><span class="thought">Нет. Нет-нет-нет. Это сон. Снова сон!</span> — завопил он внутри себя.</p>
+                        
+                        <p>Существо говорило те же слова. То же пророчество о «человеке из иного мира, мира плоти и проводов». Но теперь, услышанное во второй раз, оно обрело зловещий, буквальный смысл. Каждое слово впивалось в него, как крюк.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>"...он станет мостом между мирами, ключом и замком, пленником и тюремщиком в своей вечной темнице."</em></p>
+                        </div>
+                        
+                        <p><span class="thought">«Отпусти меня! Я хочу домой! К Елене! К детям!»</span></p>
+                        
+                        <div class="dialogue">
+                            <p><em>"Дом, — прозвучал ледяной ответ, — сгорел. Осталась только боль. Начинается твое Олицетворение."</em></p>
+                        </div>
+                    `,
+                    readingTime: 8
+                },
+                {
+                    id: 7,
+                    title: "Олицетворение боли",
+                    content: `
+                        <p>Боль пришла не как царапина. Она пришла как воспоминание. Воспоминание о том, как пламя лизало пульт. О запахе гари и расплавленного пластика. О леденящем холоде в жилах. Она пронзила его всего, выжигая изнутри. Он закричал, и на этот раз крик обрел звук — немой, раздирающий вопль, застрявший в несуществующем горле.</p>
+                        
+                        <p>Он не проснулся.</p>
+                        
+                        <p>Он рухнул сквозь слои тьмы, теряя частицы себя, пока не достиг дна.</p>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <div class="chapter-divider">
+                            <h3>Темница</h3>
+                        </div>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <p>Новое пробуждение было хуже. Бесконечно хуже.</p>
+                        
+                        <p>Во-первых, появилось тело. И оно было сплошной болью. Грубая, холодная металлическая манжета впивалась в правое запястье, сдирая кожу до крови при малейшей попытке пошевелить рукой. От нее тянулась тяжелая цепь, уходящая вверх, в непроглядную черноту, где должен был быть потолок. Его левая рука была закована так же. Цепи свисали вертикально, вытягивая руки в неестественном, мучительном положении.</p>
+                        
+                        <p>Но настоящий ад начинался ниже. К его лодыжкам были прикованы другие цепи, толстые, как запястье. Они не свисали, а уходили вниз, в ту же черноту, и были натянуты как струны. На другом их конце должны были быть чудовищные тяжести, которые медленно, неумолимо растягивали его тело, пытаясь разорвать пополам.</p>
+                        
+                        <p>Каждый сустав, каждый мускул стонал от невыносимого напряжения. Он висел в этой позе распятия, разрываемый между двумя безднами.</p>
+                        
+                        <p>Он пытался крикнуть. Из его горла вырвался лишь хриплый, кровавый пузырь. Воздуха не хватало.</p>
+                        
+                        <p class="warning-text">И тогда из тьмы перед ним выплыло Оно.</p>
+                    `,
+                    readingTime: 8
+                },
+                {
+                    id: 8,
+                    title: "Встреча с отражением",
+                    content: `
+                        <p>У него не было стабильной формы. Оно пульсировало, перетекало, нарушая любые законы физики. На мгновение это был тот самый безликий человек из Преддверия, но его контуры дрожали и расплывались. Потом форма схлопнулась в один гигантский, сияющий желтым мерцающим светом глаз, который смотрел прямо в душу Дэниса, видя все его страхи, все воспоминания. Потом глаз рассыпался на рои черных, извивающихся теней, которые снова собирались в аморфный, зловещий сгусток тьмы, в центре которого зияла дыра, всасывающая в себя тусклый свет, исходящий от... от него самого?</p>
+                        
+                        <p>Это была боль. Боль, вывернутая наизнанку и получившая форму. Боль, о которой говорило пророчество. Его собственная, не изжитая боль от потери, от страха, от отчаяния, материализованная и ставшая его палачом и сокамерником.</p>
+                        
+                        <p>Существо не говорило. Оно <span class="highlight">излучало</span> смысл, который впивался в сознание Дэниса, как раскаленные иглы.</p>
+                        
+                        <div class="dialogue">
+                            <p><em>Смотри. Это ты. Это твоя суть теперь. Пленник. Ключ. Мост. Ты — дверь, которую нельзя открыть, не сломав. Ты — вопль, который никто не услышит.</em></p>
+                        </div>
+                        
+                        <p>Дэнис закрыл глаза, пытаясь сбежать внутрь себя. Но и там царила тьма и отголоски того самого леденящего гула из Пустоты. Цепи звенели, тело рвалось на части.</p>
+                        
+                        <p>Он снова потерял сознание. Милость небытия была единственным спасением.</p>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <div class="chapter-divider">
+                            <h3>Л.И.А.</h3>
+                        </div>
+                        
+                        <div class="scene-break">***</div>
+                        
+                        <p>Прозрение было постепенным, как медленное всплытие со дна черного океана.</p>
+                        
+                        <p>Сначала пришли звуки. Глухой, ритмичный гул механизмов. Шипение пара или газа. Приглушенные, искаженные голоса за стеной.</p>
+                        
+                        <p>Потом — ощущения. Он был погружен во что-то вязкое, плотное и прохладное. Он не чувствовал своего тела, не мог пошевелить ни пальцем, ни веком. Он был заключен в некую оболочку, заполненную жидкостью. Дышать не нужно было — кислород, казалось, поступал прямо через кожу, которая онемела.</p>
+                        
+                        <p>Затем пробился свет. Тусклый, рассеянный, окрашенный в зеленоватые тона. Он попытался сфокусировать зрение. Перед ним было толстое, слегка выпуклое стекло, за которым виднелось помещение.</p>
+                        
+                        <p>Лаборатория. Но не его чистая, стерильная ЛРП. Эта была похожа на подземный бункер или тюремный лазарет времен холодной войны. Стены из грубого бетона, оплетенные стальными трубопроводами и пучками проводов в матерчатой изоляции. Освещение исходило от тусклых светильников за решетками.</p>
+                    `,
+                    readingTime: 9
+                },
+                {
+                    id: 9,
+                    title: "Лаборатория Исследования Аномалий",
+                    content: `
+                        <p>За стеклом двигались фигуры в длинных защитных костюмах тускло-желтого цвета, с масками и стеклянными щитками на шлемах. Они что-то проверяли на панелях, вносили данные в планшеты с толстыми корпусами. Технология выглядела одновременно примитивной и зловещей.</p>
+                        
+                        <p>Паника, тихая и всепоглощающая, начала пузыриться внутри него. <span class="thought">Где я? Что они со мной сделали?</span></p>
+                        
+                        <p>Его взгляд, безумный и беспомощный, метался по комнате. И остановился.</p>
+                        
+                        <p>На дальней стене, прямо напротив его... аквариума, висела металлическая табличка, покрытая сколами краски и следами ржавчины. На ней были выбиты три буквы кириллицей:</p>
+                        
+                        <div class="code-block">
+                            <p style="text-align: center; font-size: 1.5rem; letter-spacing: 0.5rem; color: #8b5cf6;">
+                                Л. И. А.
+                            </p>
+                        </div>
+                        
+                        <p style="text-align: center; font-style: italic; color: #94a3b8;">
+                            ЛАБОРАТОРИЯ ИССЛЕДОВАНИЯ АНОМАЛИЙ.
+                        </p>
+                        
+                        <p>И еще ниже, на приваренной куске стали, ручной гравировкой:</p>
+                        
+                        <div class="code-block">
+                            <p style="text-align: center;">
+                                <strong>ОБЪЕКТ:</strong> DES. <strong>СТАТУС:</strong> НЕОПРЕДЕЛЕН. <strong>КАТЕГОРИЯ:</strong> ОМЕГА.
+                            </p>
+                        </div>
+                        
+                        <p>DES. Его инициалы. Denis Edwig Sadrikov. Или... Death?</p>
+                        
+                        <p>К нему подошли двое ученых. Один что-то говорил другому, указывая на его колбу. Дэнис попытался прочитать по губам, но не смог. Вместо этого он услышал голос — не ушами, а прямо в голове, искаженный и накладывающийся на реальные звуки, как радиопомехи:</p>
+                        
+                        <div class="dialogue">
+                            <p><em>...интерфейс стабилен... показатели сознания скачут... попытка контакта через боль... отрицательный результат... продолжаем наблюдение... Протокол «Молчание» в силе...</em></p>
+                        </div>
+                        
+                        <p>Он был объектом. Аномалией. Категории «Омега». Его сознание было заперто в колбе, как мозг в банке, и его изучали. Те самые «ученые», которые должны были делать игры для его VR.</p>
+                        
+                        <p class="highlight">Пророчество сбылось. Он попал в игру. И это оказался кошмар. Вечная темница. И он был в ней пленником. И тюремщиком, возможно, для чего-то другого.</p>
+                    `,
+                    readingTime: 8
+                },
+                {
+                    id: 10,
+                    title: "Конец начала",
+                    content: `
+                        <p>Дэнис (DES? Death?) внутри своей колбы, лишенный голоса и тела, впервые за все это время совершил осознанное действие.</p>
+                        
+                        <p>Он начал тихо, безумно смеяться. Беззвучными пузырями, поднимающимися в зеленоватой жидкости навстречу безысходному свету Лаборатории Исследования Аномалий.</p>
+                        
+                        <div class="scene-break" style="height: 4px; background: linear-gradient(to right, transparent, #8b5cf6, transparent); margin: 4rem 0;"></div>
+                        
+                        <div style="text-align: center; margin: 4rem 0;">
+                            <div style="display: inline-block; padding: 2rem 3rem; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 20px; border: 2px solid #8b5cf6; position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #3b82f6, #8b5cf6);"></div>
+                                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, #fff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                    КОНЕЦ КНИГИ ПЕРВОЙ: ПАДЕНИЕ
+                                </h2>
+                                <p style="color: #94a3b8; letter-spacing: 3px; font-size: 0.9rem;">DES / DEATH: Пророчество в Пустоте</p>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin: 4rem 0; padding: 2rem; background: rgba(255, 255, 255, 0.03); border-radius: 15px; border-left: 4px solid #8b5cf6;">
+                            <div style="font-style: italic; color: #94a3b8; line-height: 1.8; font-size: 1.1rem;">
+                                <p style="margin: 1rem 0;">"Однажды человек из иного мира, мира плоти и проводов,</p>
+                                <p style="margin: 1rem 0;">падет в игру, приняв ее за сон.</p>
+                                <p style="margin: 1rem 0;">Но сон его станет явью, а явь — кошмаром,</p>
+                                <p style="margin: 1rem 0;">сотканным из его собственной, не изжитой боли.</p>
+                                <p style="margin: 2rem 0 1rem 0; font-weight: bold; color: #f1f5f9;">Он станет мостом между мирами,</p>
+                                <p style="margin: 1rem 0;">ключом и замком,</p>
+                                <p style="margin: 1rem 0;">пленником и тюремщиком</p>
+                                <p style="margin: 1rem 0;">в своей вечной темнице."</p>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; font-size: 0.9rem;">
+                            <p style="margin: 0.5rem 0; letter-spacing: 2px; text-transform: uppercase;">Пророчество исполнено</p>
+                            <p style="margin: 0.5rem 0;">Книга Первая завершена</p>
+                            <p style="margin: 2rem 0 0.5rem 0; color: #f1f5f9;">© Myxomor</p>
+                            <p style="margin: 0.5rem 0; font-size: 0.8rem;">2024 • Вселенная DES</p>
+                        </div>
+                    `,
+                    readingTime: 6
+                }
+            ]
+        };
+
+        // СОСТОЯНИЕ ЧИТАЛКИ
+        const readerState = {
+            currentChapter: 1,
+            fontSize: 1.15,
+            lineHeight: 1.8,
+            fontFamily: "'Segoe UI', sans-serif",
+            isNightMode: false,
+            bookmarks: [],
+            lastRead: new Date().toISOString()
+        };
+
+        // ИНИЦИАЛИЗАЦИЯ
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Читалка загружается...');
+            initReader();
+            loadChapter(1);
+            initControls();
+            initModals();
+            updateProgress();
+            console.log('Читалка готова!');
+        });
+
+        // ИНИЦИАЛИЗАЦИЯ НАСТРОЕК
+        function initReader() {
+            // Загрузка настроек
+            const savedSettings = localStorage.getItem('readerSettings');
+            if (savedSettings) {
+                try {
+                    const settings = JSON.parse(savedSettings);
+                    Object.assign(readerState, settings);
+                    console.log('Настройки загружены:', settings);
+                } catch (e) {
+                    console.error('Ошибка загрузки настроек:', e);
+                }
+            }
+
+            // Загрузка закладок
+            const savedBookmarks = localStorage.getItem('bookmarks');
+            if (savedBookmarks) {
+                try {
+                    readerState.bookmarks = JSON.parse(savedBookmarks);
+                    console.log('Закладки загружены:', readerState.bookmarks.length);
+                } catch (e) {
+                    console.error('Ошибка загрузки закладок:', e);
+                    readerState.bookmarks = [];
+                }
+            }
+
+            // Применение настроек
+            applySettings();
+            
+            // Обновление даты последнего чтения
+            updateLastRead();
+        }
+
+        // ИНИЦИАЛИЗАЦИЯ УПРАВЛЕНИЯ
+        function initControls() {
+            console.log('Инициализация управления...');
+            
+            // Навигация по главам
+            document.getElementById('prevChapter').addEventListener('click', prevChapter);
+            document.getElementById('nextChapter').addEventListener('click', nextChapter);
+            
+            // Селектор глав
+            const chapterSelect = document.getElementById('chapterSelect');
+            if (chapterSelect) {
+                chapterSelect.addEventListener('change', function() {
+                    const chapter = parseInt(this.value);
+                    console.log('Выбрана глава:', chapter);
+                    loadChapter(chapter);
+                });
+            }
+
+            // Управление шрифтом
+            document.getElementById('fontSmaller').addEventListener('click', decreaseFont);
+            document.getElementById('fontBigger').addEventListener('click', increaseFont);
+
+            // Кнопки действий
+            document.getElementById('bookmarkBtn').addEventListener('click', toggleBookmark);
+            document.getElementById('noteBtn').addEventListener('click', showNoteModal);
+            document.getElementById('shareBtn').addEventListener('click', shareChapter);
+            document.getElementById('tocBtn').addEventListener('click', showTocModal);
+
+            // Плавающие кнопки
+            document.getElementById('floatingBookmark').addEventListener('click', toggleBookmark);
+            document.getElementById('floatingNote').addEventListener('click', showNoteModal);
+            document.getElementById('floatingShare').addEventListener('click', shareChapter);
+            document.getElementById('floatingSettings').addEventListener('click', showSettingsModal);
+            document.getElementById('floatingToc').addEventListener('click', showTocModal);
+            document.getElementById('themeToggle').addEventListener('click', toggleNightMode);
+
+            // Двойной клик для смены темы
+            document.getElementById('readerContent').addEventListener('dblclick', toggleNightMode);
+
+            // Автосохранение при прокрутке
+            let scrollTimeout;
+            document.getElementById('readerContent').addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(saveProgress, 1000);
+            });
+
+            console.log('Управление инициализировано');
+        }
+
+        // ИНИЦИАЛИЗАЦИЯ МОДАЛЬНЫХ ОКОН
+        function initModals() {
+            console.log('Инициализация модальных окон...');
+            
+            // Закрытие модальных окон
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    if (modal) {
+                        modal.style.display = 'none';
+                        console.log('Модальное окно закрыто');
+                    }
+                });
+            });
+
+            // Закрытие по клику вне окна
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                    console.log('Модальное окно закрыто по клику вне');
+                }
+            });
+
+            // Сохранение заметки
+            const saveNoteBtn = document.querySelector('.btn-save-note');
+            if (saveNoteBtn) {
+                saveNoteBtn.addEventListener('click', saveNote);
+            }
+
+            // Применение настроек
+            const applySettingsBtn = document.querySelector('.btn-apply-settings');
+            if (applySettingsBtn) {
+                applySettingsBtn.addEventListener('click', applySettingsFromModal);
+            }
+
+            // Обновление слайдеров
+            const fontSizeSlider = document.getElementById('fontSizeSlider');
+            if (fontSizeSlider) {
+                fontSizeSlider.addEventListener('input', updateFontSizeSlider);
+                fontSizeSlider.value = readerState.fontSize;
+                updateFontSizeSlider();
+            }
+
+            const lineHeightSlider = document.getElementById('lineHeightSlider');
+            if (lineHeightSlider) {
+                lineHeightSlider.addEventListener('input', updateLineHeightSlider);
+                lineHeightSlider.value = readerState.lineHeight;
+                updateLineHeightSlider();
+            }
+
+            const fontSelect = document.getElementById('fontSelect');
+            if (fontSelect) {
+                fontSelect.value = readerState.fontFamily;
+            }
+
+            const nightModeToggle = document.getElementById('nightModeToggle');
+            if (nightModeToggle) {
+                nightModeToggle.checked = readerState.isNightMode;
+            }
+
+            console.log('Модальные окна инициализированы');
+        }
+
+        // ЗАГРУЗКА ГЛАВЫ
+        function loadChapter(chapterNumber) {
+            console.log('Загрузка главы:', chapterNumber);
+            
+            const chapter = bookData.chapters.find(ch => ch.id === chapterNumber);
+            if (!chapter) {
+                console.error('Глава не найдена:', chapterNumber);
+                return;
+            }
+
+            // Обновление состояния
+            readerState.currentChapter = chapterNumber;
+            
+            // Обновление UI
+            document.getElementById('currentChapter').textContent = chapterNumber;
+            document.getElementById('chapterTitle').textContent = chapter.title;
+            document.getElementById('chapterSelect').value = chapterNumber;
+            document.getElementById('readingTime').textContent = chapter.readingTime + ' мин';
+            
+            // Загрузка контента
+            const readerContent = document.getElementById('readerContent');
+            if (readerContent) {
+                readerContent.innerHTML = chapter.content;
+                console.log('Контент загружен');
+            }
+            
+            // Обновление прогресса
+            updateChapterProgress();
+            
+            // Прокрутка вверх
+            if (readerContent) {
+                readerContent.scrollTop = 0;
+            }
+            
+            // Обновление кнопок навигации
+            updateNavButtons();
+            
+            // Обновление закладок
+            updateBookmarkButton();
+            
+            // Сохранение прогресса
+            saveProgress();
+            
+            // Применение настроек шрифта
+            applyFontSize();
+            
+            console.log('Глава загружена успешно');
+        }
+
+        // ОБНОВЛЕНИЕ КНОПОК НАВИГАЦИИ
+        function updateNavButtons() {
+            const prevBtn = document.getElementById('prevChapter');
+            const nextBtn = document.getElementById('nextChapter');
+            
+            if (prevBtn) {
+                prevBtn.disabled = readerState.currentChapter <= 1;
+                prevBtn.style.opacity = prevBtn.disabled ? '0.5' : '1';
+            }
+            
+            if (nextBtn) {
+                nextBtn.disabled = readerState.currentChapter >= bookData.chapters.length;
+                nextBtn.style.opacity = nextBtn.disabled ? '0.5' : '1';
+            }
+        }
+
+        // ОБНОВЛЕНИЕ ПРОГРЕССА ГЛАВЫ
+        function updateChapterProgress() {
+            const totalChapters = bookData.chapters.length;
+            const progressPercent = Math.round((readerState.currentChapter / totalChapters) * 100);
+            
+            const progressFill = document.getElementById('progressFill');
+            const progressPercentElement = document.getElementById('progressPercent');
+            const timeLeftElement = document.getElementById('timeLeft');
+            
+            if (progressFill) {
+                progressFill.style.width = `${progressPercent}%`;
+            }
+            
+            if (progressPercentElement) {
+                progressPercentElement.textContent = `${progressPercent}% прочитано`;
+            }
+            
+            // Расчет оставшегося времени
+            if (timeLeftElement) {
+                const remainingChapters = totalChapters - readerState.currentChapter;
+                let totalRemainingTime = 0;
+                
+                for (let i = readerState.currentChapter; i < totalChapters; i++) {
+                    totalRemainingTime += bookData.chapters[i].readingTime || 5;
+                }
+                
+                timeLeftElement.textContent = `Осталось: ~${totalRemainingTime} мин`;
+            }
+        }
+
+        // ПРЕДЫДУЩАЯ ГЛАВА
+        function prevChapter() {
+            if (readerState.currentChapter > 1) {
+                loadChapter(readerState.currentChapter - 1);
+            }
+        }
+
+        // СЛЕДУЮЩАЯ ГЛАВА
+        function nextChapter() {
+            if (readerState.currentChapter < bookData.chapters.length) {
+                loadChapter(readerState.currentChapter + 1);
+            }
+        }
+
+        // УМЕНЬШИТЬ ШРИФТ
+        function decreaseFont() {
+            if (readerState.fontSize > 0.9) {
+                readerState.fontSize = Math.round((readerState.fontSize - 0.1) * 10) / 10;
+                console.log('Уменьшение шрифта до:', readerState.fontSize);
+                applyFontSize();
+                saveSettings();
+                showToast('Шрифт уменьшен', 'info');
+            }
+        }
+
+        // УВЕЛИЧИТЬ ШРИФТ
+        function increaseFont() {
+            if (readerState.fontSize < 1.8) {
+                readerState.fontSize = Math.round((readerState.fontSize + 0.1) * 10) / 10;
+                console.log('Увеличение шрифта до:', readerState.fontSize);
+                applyFontSize();
+                saveSettings();
+                showToast('Шрифт увеличен', 'info');
+            }
+        }
+
+        // ПРИМЕНИТЬ РАЗМЕР ШРИФТА
+        function applyFontSize() {
+            const readerContent = document.getElementById('readerContent');
+            if (readerContent) {
+                readerContent.style.fontSize = `${readerState.fontSize}rem`;
+                readerContent.style.lineHeight = readerState.lineHeight;
+                readerContent.style.fontFamily = readerState.fontFamily;
+                console.log('Шрифт применен:', readerState.fontSize + 'rem');
+            }
+        }
+
+        // ПЕРЕКЛЮЧЕНИЕ ТЕМНОЙ ТЕМЫ
+        function toggleNightMode() {
+            readerState.isNightMode = !readerState.isNightMode;
+            console.log('Переключение темы:', readerState.isNightMode ? 'темная' : 'светлая');
+            
+            if (readerState.isNightMode) {
+                enableNightMode();
+            } else {
+                disableNightMode();
+            }
+            
+            saveSettings();
+            showToast(readerState.isNightMode ? 'Темная тема включена' : 'Светлая тема включена', 'info');
+        }
+
+        // ВКЛЮЧИТЬ ТЕМНУЮ ТЕМУ
+        function enableNightMode() {
+            console.log('Включение темной темы');
+            
+            // Добавляем классы для всех элементов
+            document.body.classList.add('night-mode');
+            
+            const elements = [
+                '.reader-content',
+                '.floating-menu',
+                '.reader-footer',
+                '.reader-header',
+                '.modal-content'
+            ];
+            
+            elements.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    element.classList.add('night-mode');
+                }
+            });
+            
+            // Обновляем иконку
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                themeToggle.title = 'Светлая тема';
+            }
+            
+            // Меняем фон страницы
+            document.body.style.backgroundColor = '#0f172a';
+        }
+
+        // ВЫКЛЮЧИТЬ ТЕМНУЮ ТЕМУ
+        function disableNightMode() {
+            console.log('Выключение темной темы');
+            
+            // Убираем классы
+            document.body.classList.remove('night-mode');
+            
+            const elements = [
+                '.reader-content',
+                '.floating-menu',
+                '.reader-footer',
+                '.reader-header',
+                '.modal-content'
+            ];
+            
+            elements.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    element.classList.remove('night-mode');
+                }
+            });
+            
+            // Обновляем иконку
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                themeToggle.title = 'Темная тема';
+            }
+            
+            // Возвращаем светлый фон
+            document.body.style.backgroundColor = '#f8fafc';
+        }
+
+        // ПРИМЕНИТЬ ВСЕ НАСТРОЙКИ
+        function applySettings() {
+            console.log('Применение настроек');
+            applyFontSize();
+            
+            if (readerState.isNightMode) {
+                enableNightMode();
+            } else {
+                disableNightMode();
+            }
+        }
+
+        // СОХРАНИТЬ НАСТРОЙКИ
+        function saveSettings() {
+            try {
+                localStorage.setItem('readerSettings', JSON.stringify(readerState));
+                console.log('Настройки сохранены');
+            } catch (e) {
+                console.error('Ошибка сохранения настроек:', e);
+            }
+        }
+
+        // ПЕРЕКЛЮЧЕНИЕ ЗАКЛАДКИ
+        function toggleBookmark() {
+            const chapter = readerState.currentChapter;
+            const bookmarkIndex = readerState.bookmarks.findIndex(b => b.chapter === chapter);
+            
+            console.log('Переключение закладки для главы:', chapter);
+            
+            if (bookmarkIndex >= 0) {
+                // Удаление закладки
+                readerState.bookmarks.splice(bookmarkIndex, 1);
+                console.log('Закладка удалена');
+                showToast('Закладка удалена', 'info');
+            } else {
+                // Добавление закладки
+                readerState.bookmarks.push({
+                    chapter: chapter,
+                    date: new Date().toISOString(),
+                    title: bookData.chapters.find(ch => ch.id === chapter)?.title || `Глава ${chapter}`
+                });
+                console.log('Закладка добавлена');
+                showToast('Закладка добавлена', 'success');
+            }
+            
+            updateBookmarkButton();
+            
+            // Сохранение закладок
+            try {
+                localStorage.setItem('bookmarks', JSON.stringify(readerState.bookmarks));
+            } catch (e) {
+                console.error('Ошибка сохранения закладок:', e);
+            }
+        }
+
+        // ОБНОВИТЬ КНОПКУ ЗАКЛАДКИ
+        function updateBookmarkButton() {
+            const chapter = readerState.currentChapter;
+            const hasBookmark = readerState.bookmarks.some(b => b.chapter === chapter);
+            
+            const bookmarkBtn = document.getElementById('bookmarkBtn');
+            const floatingBookmark = document.getElementById('floatingBookmark');
+            
+            if (hasBookmark) {
+                if (bookmarkBtn) {
+                    bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i> В закладках';
+                    bookmarkBtn.classList.add('active');
+                }
+                if (floatingBookmark) {
+                    floatingBookmark.innerHTML = '<i class="fas fa-bookmark"></i>';
+                    floatingBookmark.classList.add('active');
+                }
+            } else {
+                if (bookmarkBtn) {
+                    bookmarkBtn.innerHTML = '<i class="far fa-bookmark"></i> Закладка';
+                    bookmarkBtn.classList.remove('active');
+                }
+                if (floatingBookmark) {
+                    floatingBookmark.innerHTML = '<i class="far fa-bookmark"></i>';
+                    floatingBookmark.classList.remove('active');
+                }
+            }
+        }
+
+        // ПОКАЗАТЬ МОДАЛЬНОЕ ОКНО ЗАМЕТКИ
+        function showNoteModal() {
+            console.log('Открытие окна заметки');
+            const modal = document.getElementById('noteModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                const noteText = document.getElementById('noteText');
+                if (noteText) {
+                    noteText.focus();
+                    noteText.value = '';
+                }
+            }
+        }
+
+        // СОХРАНИТЬ ЗАМЕТКУ
+        function saveNote() {
+            const noteText = document.getElementById('noteText');
+            if (!noteText) return;
+            
+            const text = noteText.value.trim();
+            if (text) {
+                const note = {
+                    chapter: readerState.currentChapter,
+                    text: text,
+                    date: new Date().toISOString(),
+                    chapterTitle: bookData.chapters.find(ch => ch.id === readerState.currentChapter)?.title || `Глава ${readerState.currentChapter}`
+                };
+                
+                console.log('Сохранение заметки:', note);
+                
+                // Сохранение заметки
+                try {
+                    const notes = JSON.parse(localStorage.getItem('notes') || '[]');
+                    notes.push(note);
+                    localStorage.setItem('notes', JSON.stringify(notes));
+                    
+                    // Закрытие модального окна
+                    const modal = document.getElementById('noteModal');
+                    if (modal) {
+                        modal.style.display = 'none';
+                    }
+                    
+                    noteText.value = '';
+                    showToast('Заметка сохранена', 'success');
+                } catch (e) {
+                    console.error('Ошибка сохранения заметки:', e);
+                    showToast('Ошибка сохранения заметки', 'error');
+                }
+            } else {
+                showToast('Введите текст заметки', 'info');
+            }
+        }
+
+        // ПОДЕЛИТЬСЯ ГЛАВОЙ
+        function shareChapter() {
+            const chapter = bookData.chapters.find(ch => ch.id === readerState.currentChapter);
+            const shareText = `Читаю "${bookData.title}" - Глава ${readerState.currentChapter}: ${chapter?.title || ''}`;
+            const shareUrl = window.location.href;
+            
+            console.log('Поделиться главой:', shareText);
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: bookData.title,
+                    text: shareText,
+                    url: shareUrl
+                }).then(() => {
+                    console.log('Успешный шеринг');
+                }).catch(err => {
+                    console.error('Ошибка шеринга:', err);
+                    copyToClipboard(`${shareText}\n\n${shareUrl}`);
+                });
+            } else {
+                copyToClipboard(`${shareText}\n\n${shareUrl}`);
+            }
+        }
+
+        // КОПИРОВАТЬ В БУФЕР ОБМЕНА
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Ссылка скопирована в буфер обмена', 'info');
+            }).catch(err => {
+                console.error('Ошибка копирования:', err);
+                showToast('Не удалось скопировать ссылку', 'error');
+            });
+        }
+
+        // ПОКАЗАТЬ ОГЛАВЛЕНИЕ
+        function showTocModal() {
+            console.log('Открытие оглавления');
+            const modal = document.getElementById('tocModal');
+            const tocList = document.getElementById('tocList');
+            
+            if (!modal || !tocList) return;
+            
+            // Генерация списка глав
+            tocList.innerHTML = bookData.chapters.map(chapter => {
+                const hasBookmark = readerState.bookmarks.some(b => b.chapter === chapter.id);
+                const isActive = chapter.id === readerState.currentChapter;
+                
+                return `
+                    <div class="toc-item ${isActive ? 'active' : ''}" 
+                         onclick="loadChapter(${chapter.id}); document.getElementById('tocModal').style.display='none'">
+                        <div class="toc-item-content">
+                            <span class="toc-number">Глава ${chapter.id}</span>
+                            <h4 class="toc-title">${chapter.title}</h4>
+                            <span class="toc-time">${chapter.readingTime} мин</span>
+                        </div>
+                        ${hasBookmark ? '<i class="fas fa-bookmark toc-bookmark"></i>' : ''}
+                    </div>
+                `;
+            }).join('');
+            
+            modal.style.display = 'flex';
+        }
+
+        // ПОКАЗАТЬ НАСТРОЙКИ ЧТЕНИЯ
+        function showSettingsModal() {
+            console.log('Открытие настроек');
+            const modal = document.getElementById('settingsModal');
+            
+            if (!modal) return;
+            
+            // Установка текущих значений
+            const fontSizeSlider = document.getElementById('fontSizeSlider');
+            const lineHeightSlider = document.getElementById('lineHeightSlider');
+            const fontSelect = document.getElementById('fontSelect');
+            const nightModeToggle = document.getElementById('nightModeToggle');
+            
+            if (fontSizeSlider) fontSizeSlider.value = readerState.fontSize;
+            if (lineHeightSlider) lineHeightSlider.value = readerState.lineHeight;
+            if (fontSelect) fontSelect.value = readerState.fontFamily;
+            if (nightModeToggle) nightModeToggle.checked = readerState.isNightMode;
+            
+            updateFontSizeSlider();
+            updateLineHeightSlider();
+            
+            modal.style.display = 'flex';
+        }
+
+        // ОБНОВИТЬ СЛАЙДЕР РАЗМЕРА ШРИФТА
+        function updateFontSizeSlider() {
+            const slider = document.getElementById('fontSizeSlider');
+            const valueElement = document.getElementById('fontSizeValue');
+            
+            if (!slider || !valueElement) return;
+            
+            const value = parseFloat(slider.value);
+            let label = 'Средний';
+            
+            if (value < 1.0) label = 'Маленький';
+            else if (value < 1.3) label = 'Средний';
+            else if (value < 1.6) label = 'Крупный';
+            else label = 'Очень крупный';
+            
+            valueElement.textContent = label;
+        }
+
+        // ОБНОВИТЬ СЛАЙДЕР МЕЖСТРОЧНОГО ИНТЕРВАЛА
+        function updateLineHeightSlider() {
+            const slider = document.getElementById('lineHeightSlider');
+            const valueElement = document.getElementById('lineHeightValue');
+            
+            if (!slider || !valueElement) return;
+            
+            const value = parseFloat(slider.value);
+            let label = 'Стандартный';
+            
+            if (value < 1.6) label = 'Компактный';
+            else if (value < 1.9) label = 'Стандартный';
+            else label = 'Просторный';
+            
+            valueElement.textContent = label;
+        }
+
+        // ПРИМЕНИТЬ НАСТРОЙКИ ИЗ МОДАЛЬНОГО ОКНА
+        function applySettingsFromModal() {
+            console.log('Применение настроек из модального окна');
+            
+            const fontSizeSlider = document.getElementById('fontSizeSlider');
+            const lineHeightSlider = document.getElementById('lineHeightSlider');
+            const fontSelect = document.getElementById('fontSelect');
+            const nightModeToggle = document.getElementById('nightModeToggle');
+            
+            if (fontSizeSlider) readerState.fontSize = parseFloat(fontSizeSlider.value);
+            if (lineHeightSlider) readerState.lineHeight = parseFloat(lineHeightSlider.value);
+            if (fontSelect) readerState.fontFamily = fontSelect.value;
+            if (nightModeToggle) readerState.isNightMode = nightModeToggle.checked;
+            
+            applySettings();
+            saveSettings();
+            
+            const modal = document.getElementById('settingsModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            
+            showToast('Настройки применены', 'success');
+        }
+
+        // СОХРАНИТЬ ПРОГРЕСС
+        function saveProgress() {
+            readerState.lastRead = new Date().toISOString();
+            
+            try {
+                localStorage.setItem('readingProgress', JSON.stringify({
+                    bookId: bookData.id,
+                    chapter: readerState.currentChapter,
+                    lastRead: readerState.lastRead
+                }));
+                console.log('Прогресс сохранен:', readerState.currentChapter);
+            } catch (e) {
+                console.error('Ошибка сохранения прогресса:', e);
+            }
+            
+            updateLastRead();
+        }
+
+        // ОБНОВИТЬ ДАТУ ПОСЛЕДНЕГО ЧТЕНИЯ
+        function updateLastRead() {
+            const lastReadElement = document.getElementById('lastRead');
+            if (!lastReadElement) return;
+            
+            const date = new Date(readerState.lastRead);
+            if (isToday(date)) {
+                lastReadElement.textContent = 'Сегодня';
+            } else if (isYesterday(date)) {
+                lastReadElement.textContent = 'Вчера';
+            } else {
+                lastReadElement.textContent = date.toLocaleDateString('ru-RU', {
+                    day: 'numeric',
+                    month: 'long'
+                });
+            }
+        }
+
+        // ПРОВЕРИТЬ СЕГОДНЯШНЮЮ ДАТУ
+        function isToday(date) {
+            const today = new Date();
+            return date.getDate() === today.getDate() &&
+                   date.getMonth() === today.getMonth() &&
+                   date.getFullYear() === today.getFullYear();
+        }
+
+        // ПРОВЕРИТЬ ВЧЕРАШНЮЮ ДАТУ
+        function isYesterday(date) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            return date.getDate() === yesterday.getDate() &&
+                   date.getMonth() === yesterday.getMonth() &&
+                   date.getFullYear() === yesterday.getFullYear();
+        }
+
+        // ПОКАЗАТЬ УВЕДОМЛЕНИЕ
+        function showToast(message, type = 'info') {
+            console.log('Показ тоста:', message, type);
+            
+            // Создание тоста
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Анимация появления
+            setTimeout(() => toast.classList.add('show'), 10);
+            
+            // Удаление через 3 секунды
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // ОБНОВИТЬ ПРОГРЕСС
+        function updateProgress() {
+            console.log('Обновление прогресса');
+            
+            // Загрузка сохраненного прогресса
+            const savedProgress = localStorage.getItem('readingProgress');
+            if (savedProgress) {
+                try {
+                    const progress = JSON.parse(savedProgress);
+                    if (progress.bookId === bookData.id && progress.chapter) {
+                        readerState.currentChapter = progress.chapter;
+                        readerState.lastRead = progress.lastRead;
+                        console.log('Прогресс загружен:', progress.chapter);
+                        loadChapter(readerState.currentChapter);
+                    }
+                } catch (e) {
+                    console.error('Ошибка загрузки прогресса:', e);
+                }
+            }
+        }
+
+        // Добавляем глобальные функции для вызова из HTML
+        window.loadChapter = loadChapter;
+        window.prevChapter = prevChapter;
+        window.nextChapter = nextChapter;
+        window.toggleNightMode = toggleNightMode;
+        window.toggleBookmark = toggleBookmark;
+        window.showNoteModal = showNoteModal;
+        window.showTocModal = showTocModal;
+        window.showSettingsModal = showSettingsModal;
+        window.shareChapter = shareChapter;
+
+        console.log('Скрипт читалки загружен и готов к работе');
+    </script>
+</body>
+</html>
