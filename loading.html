@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Переход в MyxomorBook - AresCraftX</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .loading-container {
+            text-align: center;
+            max-width: 500px;
+            padding: 40px;
+        }
+        
+        .loading-icon {
+            font-size: 4rem;
+            color: #ff6600;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .loading-bar {
+            width: 300px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 30px auto;
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6600, #ff9900);
+            width: 0%;
+            animation: load 2s ease-in-out forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes load {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        h1 {
+            color: #ff6600;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="loading-icon">
+            <i class="fas fa-book"></i>
+        </div>
+        <h1>Переходим в MyxomorBook</h1>
+        <p>Инициализация библиотеки...</p>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <p style="font-size: 0.9rem; color: #666;">
+            Перенаправление через <span id="countdown">3</span> секунды
+        </p>
+    </div>
+    <script>
+        // Получаем параметр из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const project = urlParams.get('project');
+        
+        // Определяем, куда переходить
+        let redirectUrl = '';
+        let projectName = '';
+        
+        switch(project) {
+            case 'myxomorbook':
+                redirectUrl = 'MyxomorBook/index.html';
+                projectName = 'MyxomorBook';
+                break;
+            case 'aresgram':
+                redirectUrl = '#'; // пока нет
+                projectName = 'AresGram';
+                break;
+            case 'minecraft':
+                redirectUrl = '#';
+                projectName = 'Minecraft';
+                break;
+            case 'launcher':
+                redirectUrl = '#';
+                projectName = 'Лаунчер';
+                break;
+            default:
+                redirectUrl = 'index.html'; // назад на главную
+        }
+        
+        // Обновляем заголовок
+        if (projectName) {
+            document.querySelector('h1').textContent = `Переходим в ${projectName}`;
+            document.querySelector('p').textContent = `Инициализация ${projectName}...`;
+        }
+        
+        // Таймер обратного отсчета
+        let count = 3;
+        const countdownEl = document.getElementById('countdown');
+        
+        const timer = setInterval(() => {
+            count--;
+            if (countdownEl) {
+                countdownEl.textContent = count;
+            }
+            
+            if (count <= 0) {
+                clearInterval(timer);
+                // Переход в выбранный проект
+                if (redirectUrl && redirectUrl !== '#') {
+                    window.location.href = redirectUrl;
+                } else {
+                    // Если проекта еще нет - обратно на главную
+                    window.location.href = 'index.html';
+                }
+            }
+        }, 1000);
+        
+        // Резервный таймаут на случай ошибки
+        setTimeout(() => {
+            if (redirectUrl && redirectUrl !== '#') {
+                window.location.href = redirectUrl;
+            } else {
+                window.location.href = 'index.html';
+            }
+        }, 4000);
+    </script>
+    <script>
+        let count = 3;
+        const countdownEl = document.getElementById('countdown');
+        
+        const timer = setInterval(() => {
+            count--;
+            countdownEl.textContent = count;
+            
+            if (count <= 0) {
+                clearInterval(timer);
+                // Переход в MyxomorBook
+                window.location.href = 'MyxomorBook/index.html';
+            }
+        }, 1000);
+        
+        // Если вдруг что-то пошло не так
+        setTimeout(() => {
+            window.location.href = 'MyxomorBook/index.html';
+        }, 4000);
+    </script>
+</body>
+</html>

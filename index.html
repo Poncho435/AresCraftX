@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AresCraftX - Экосистема для творчества</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-fire"></i></div>
+                <div class="logo-text">AresCraftX</div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
+                    
+                    <!-- Ссылки на проекты -->
+                    <li class="dropdown">
+                        <a href="#projects" class="dropdown-toggle">
+                            <i class="fas fa-rocket"></i> Проекты 
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" onclick="openProject('myxomor')">
+                                <i class="fas fa-book"></i> MyxomorBook
+                            </a>
+                            <a href="#" onclick="openProject('aresgram')">
+                                <i class="fas fa-comments"></i> AresGram
+                            </a>
+                            <a href="#" onclick="openProject('minecraft')">
+                                <i class="fas fa-gamepad"></i> Minecraft Сервер
+                            </a>
+                            <a href="#" onclick="openProject('launcher')">
+                                <i class="fas fa-play-circle"></i> Наш Лаунчер
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <!-- "О нас" с выпадающим списком -->
+                    <li class="dropdown">
+                        <a href="#about" class="dropdown-toggle">
+                            <i class="fas fa-info-circle"></i> О нас 
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#about-project">
+                                <i class="fas fa-code"></i> О проекте
+                            </a>
+                            <a href="#team">
+                                <i class="fas fa-users"></i> Наша команда
+                            </a>
+                            <a href="#history">
+                                <i class="fas fa-history"></i> История
+                            </a>
+                            <a href="#roadmap">
+                                <i class="fas fa-map"></i> Планы развития
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <div class="auth-buttons">
+                <a href="auth.html" class="btn btn-primary">
+                    <i class="fas fa-user-circle"></i> Войти / Регистрация
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">AresCraftX</h1>
+                <p class="hero-subtitle">Экосистема для творчества, объединяющая лучшие проекты в одном месте</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Проекта</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Поддержка</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Безопасность</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Возможности</span>
+                    </div>
+                </div>
+                
+                <div class="hero-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Чтение книг</h3>
+                        <p>Тысячи произведений в удобном формате с AI-рекомендациями</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Игровая платформа</h3>
+                        <p>Уникальные сервера и моды для лучшего геймплея</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Социальная сеть</h3>
+                        <p>Приватное общение без рекламы и слежки</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Инструменты</h3>
+                        <p>Полезные утилиты для работы и творчества</p>
+                    </div>
+                </div>
+                
+                <div class="quick-links mt-30">
+                    <h3>Быстрый доступ к проектам:</h3>
+                    <div class="quick-buttons">
+                        <!-- ИЗМЕНИ ВСЕ КНОПКИ: -->
+                        <button class="btn quick-btn" onclick="goToMyxomorBook()">
+                            <i class="fas fa-book"></i> MyxomorBook
+                        </button>
+                        <button class="btn quick-btn" onclick="goToAresGram()">
+                            <i class="fas fa-comments"></i> AresGram
+                        </button>
+                        <button class="btn quick-btn" onclick="goToMinecraft()">
+                            <i class="fas fa-gamepad"></i> Minecraft
+                        </button>
+                        <button class="btn quick-btn" onclick="goToLauncher()">
+                            <i class="fas fa-play-circle"></i> Лаунчер
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- Слайдер преимуществ - ПРОСТАЯ РАБОЧАЯ ВЕРСИЯ -->
+    <section class="features-slider">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают AresCraftX?</h2>
+            
+            <div class="simple-slider-container">
+                <!-- Слайды -->
+                <div class="slides-wrapper">
+                    <div class="slides-track">
+                        <!-- Слайд 1 -->
+                        <div class="slide active" style="display: flex; opacity: 1;">
+                            <div class="slide-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Максимальная безопасность</h3>
+                            <p>Мы используем современные технологии шифрования и двухфакторную аутентификацию для защиты ваших данных. Ваша приватность - наш приоритет.</p>
+                        </div>
+                        
+                        <!-- Слайд 2 -->
+                        <div class="slide" style="display: none; opacity: 0;">
+                            <div class="slide-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <h3>Полная синхронизация</h3>
+                            <p>Ваш прогресс, настройки и достижения сохраняются на всех устройствах. Начните на ПК, продолжите на телефоне - все автоматически синхронизируется.</p>
+                        </div>
+                        
+                        <!-- Слайд 3 -->
+                        <div class="slide" style="display: none; opacity: 0;">
+                            <div class="slide-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Активное сообщество</h3>
+                            <p>Присоединяйтесь к тысячам пользователей со всего мира. Делитесь опытом, находите друзей и участвуйте в уникальных событиях платформы.</p>
+                        </div>
+                        
+                        <!-- Слайд 4 -->
+                        <div class="slide" style="display: none; opacity: 0;">
+                            <div class="slide-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3>Постоянное развитие</h3>
+                            <p>Мы постоянно добавляем новые функции и улучшаем существующие на основе ваших отзывов. AresCraftX развивается вместе с вами.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Управление -->
+                <div class="slider-controls">
+                    <div class="slider-nav">
+                        <button class="slider-nav-btn prev-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <div class="slider-dots">
+                            <button class="slider-dot active" data-index="0"></button>
+                            <button class="slider-dot" data-index="1"></button>
+                            <button class="slider-dot" data-index="2"></button>
+                            <button class="slider-dot" data-index="3"></button>
+                        </div>
+                        
+                        <button class="slider-nav-btn next-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="slide-counter">
+                        <span class="current-slide">1</span> / <span class="total-slides">4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Раздел "О нас" -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">О нас</h2>
+            
+            <div class="about-content">
+                <div class="about-tabs">
+                    <button class="about-tab active" data-tab="about-project">
+                        <i class="fas fa-code"></i> О проекте
+                    </button>
+                    <button class="about-tab" data-tab="team">
+                        <i class="fas fa-users"></i> Команда
+                    </button>
+                    <button class="about-tab" data-tab="history">
+                        <i class="fas fa-history"></i> История
+                    </button>
+                    <button class="about-tab" data-tab="roadmap">
+                        <i class="fas fa-map"></i> Планы
+                    </button>
+                </div>
+                
+                <div class="about-panels">
+                    <div class="about-panel active" id="about-project-panel">
+                        <h3><i class="fas fa-code"></i> О проекте AresCraftX</h3>
+                        <p><strong>AresCraftX</strong> - это полноценная цифровая экосистема, созданная для тех, кто ценит качество, безопасность и удобство. Мы объединили несколько независимых проектов под одной крышей, чтобы предоставить вам максимально комфортный пользовательский опыт.</p>
+                        
+                        <p>Наша миссия - создать пространство, где каждый найдет что-то для себя. Все проекты интегрированы между собой и используют единую систему аккаунтов AresAccount.</p>
+                        
+                        <h4 class="mt-30">Наши принципы:</h4>
+                        <ul>
+                            <li><strong>Безопасность превыше всего</strong> - современные технологии шифрования</li>
+                            <li><strong>Удобство использования</strong> - интуитивно понятные интерфейсы</li>
+                            <li><strong>Постоянное развитие</strong> - регулярные обновления и новые функции</li>
+                            <li><strong>Сообщество в центре</strong> - развиваемся вместе с пользователями</li>
+                            <li><strong>Доступность</strong> - основные функции бесплатны для всех</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="about-panel" id="team-panel">
+                        <h3><i class="fas fa-users"></i> Наша команда</h3>
+                        <p>Мы - команда энтузиастов и профессионалов, объединенных общей целью создать качественные цифровые продукты.</p>
+                        
+                        <div class="team-grid">
+                            <div class="team-member">
+                                <div class="member-avatar">А</div>
+                                <h4>Артем (Poncho435)</h4>
+                                <p><strong>Основатель и главный разработчик</strong></p>
+                                <p>Архитектор платформы, отвечает за буквально все и вся.</p>
+                            </div>
+                            <div class="team-member">
+                                <div class="member-avatar">М</div>
+                                <h4>Нету (...)</h4>
+                                <p><strong>Дизайнер, UI/UX специалист</strong></p>
+                                <p>Создает удобные и красивые интерфейсы, работает над пользовательским опытом.</p>
+                            </div>
+                            <div class="team-member">
+                                <div class="member-avatar">Д</div>
+                                <h4>Нету (...)</h4>
+                                <p><strong>Бэкенд разработчик</strong></p>
+                                <p>Разрабатывает серверную логику, работает с базами данных и API.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-panel" id="history-panel">
+                        <h3><i class="fas fa-history"></i> История проекта</h3>
+                        <p>Наш путь начался с простой идеи и превратился в полноценную экосистему.</p>
+                        
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">Январь 2024</div>
+                                <div class="timeline-content">
+                                    <h4>Рождение идеи</h4>
+                                    <p>Появилась идея создать единую платформу для игроков Minecraft.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Февраль 2024</div>
+                                <div class="timeline-content">
+                                    <h4>Сбор команды</h4>
+                                    <p>Найдены единомышленники, сформирована основная команда.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Март 2024</div>
+                                <div class="timeline-content">
+                                    <h4>Первый прототип</h4>
+                                    <p>Создан первый рабочий прототип сайта AresCraftX.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Апрель 2024</div>
+                                <div class="timeline-content">
+                                    <h4>Разработка MyxomorBook</h4>
+                                    <p>Запущена разработка платформы для чтения книг.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Май 2024</div>
+                                <div class="timeline-content">
+                                    <h4>Расширение экосистемы</h4>
+                                    <p>Добавлены проекты AresGram и Minecraft сервер.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Июнь 2024</div>
+                                <div class="timeline-content">
+                                    <h4>Публичный запуск</h4>
+                                    <p>Официальный запуск платформы AresCraftX.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-panel" id="roadmap-panel">
+                        <h3><i class="fas fa-map"></i> Планы развития</h3>
+                        <p>Мы постоянно работаем над улучшением платформы и добавлением новых возможностей.</p>
+                        
+                        <ul class="roadmap-list">
+                            <li>
+                                <span class="roadmap-done"><i class="fas fa-check"></i></span>
+                                <div>
+                                    <strong>Единая система аккаунтов</strong>
+                                    <p>AresAccount для всех проектов (выполнено)</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="roadmap-done"><i class="fas fa-check"></i></span>
+                                <div>
+                                    <strong>Базовые проекты</strong>
+                                    <p>MyxomorBook, AresGram, Minecraft сервер (выполнено)</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="roadmap-current"><i class="fas fa-spinner"></i></span>
+                                <div>
+                                    <strong>Торговая площадка</strong>
+                                    <p>Безопасная покупка/продажа игровых предметов (в разработке)</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="roadmap-current"><i class="fas fa-spinner"></i></span>
+                                <div>
+                                    <strong>TikTok интеграция</strong>
+                                    <p>Публикация контента напрямую в TikTok (в разработке)</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="roadmap-planned"><i class="fas fa-clock"></i></span>
+                                <div>
+                                    <strong>Мобильное приложение</strong>
+                                    <p>Нативные приложения для iOS и Android (планируется)</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="roadmap-planned"><i class="fas fa-clock"></i></span>
+                                <div>
+                                    <strong>Система достижений</strong>
+                                    <p>Геймификация с наградами и бейджами (планируется)</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Проекты -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Наши проекты</h2>
+            <p class="contact-subtitle">Все проекты работают в единой экосистеме с общим аккаунтом</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header" style="background: linear-gradient(135deg, #ff6600, #ff8533);">
+                        <div class="project-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header" style="background: linear-gradient(135deg, #ff6600, #ff8533);">
+                            <div class="project-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>MyxomorBook</h3>
+                            <p>Современная платформа для чтения книг с AI-рекомендациями и социальными функциями.</p>
+                            <div class="project-status coming-soon">В разработке</div>
+                            
+                            <!-- ИЗМЕНИ ЭТУ КНОПКУ: -->
+                            <button class="btn btn-secondary" onclick="goToMyxomorBook()">
+                                <i class="fas fa-external-link-alt"></i> Перейти к чтению
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header" style="background: linear-gradient(135deg, #ff5500, #ff7744);">
+                        <div class="project-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>AresGram</h3>
+                        <p>Приватная социальная сеть нового поколения с шифрованием сообщений.</p>
+                        <div class="project-status coming-soon">В разработке</div>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-external-link-alt"></i> Подробнее
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header" style="background: linear-gradient(135deg, #ff9900, #ffbb44);">
+                        <div class="project-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Minecraft Сервер</h3>
+                        <p>Уникальный игровой мир с кастомными модами и активным сообществом.</p>
+                        <div class="project-status coming-soon">В разработке</div>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-external-link-alt"></i> Подключиться
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header" style="background: linear-gradient(135deg, #ff3300, #ff6644);">
+                        <div class="project-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>AresCraftX Launcher</h3>
+                        <p>Универсальный лаунчер для всех проектов экосистемы.</p>
+                        <div class="project-status coming-soon">В разработке</div>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-external-link-alt"></i> Скачать
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <p class="contact-subtitle">Свяжитесь с нами для сотрудничества, предложений или технической поддержки</p>
+            
+            <div class="contact-links">
+                <a href="#" class="contact-card">
+                    <i class="fab fa-discord"></i>
+                    <span>Discord</span>
+                    <span class="contact-subtitle">Общение с сообществом</span>
+                </a>
+                <a href="#" class="contact-card">
+                    <i class="fab fa-telegram"></i>
+                    <span>Telegram</span>
+                    <span class="contact-subtitle">Новости и анонсы</span>
+                </a>
+                <a href="#" class="contact-card">
+                    <i class="fab fa-vk"></i>
+                    <span>VK</span>
+                    <span class="contact-subtitle">Русскоязычное сообщество</span>
+                </a>
+                <a href="mailto:support@arescraftx.com" class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                    <span class="contact-subtitle">Техподдержка и сотрудничество</span>
+                </a>
+            </div>
+            
+            <div class="faq-grid mt-30">
+                <div class="faq-item">
+                    <h4><i class="fas fa-question-circle"></i> Нужно ли платить за использование?</h4>
+                    <p>Основные функции всех проектов бесплатны. Премиум-подписка открывает дополнительные возможности.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="fas fa-question-circle"></i> Как создать аккаунт?</h4>
+                    <p>Нажмите кнопку "Регистрация" в правом верхнем углу и заполните простую форму.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="fas fa-question-circle"></i> На каких устройствах работает?</h4>
+                    <p>Сайт адаптирован для ПК, планшетов и смартфонов. Лаунчер доступен для Windows, macOS и Linux.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="fas fa-question-circle"></i> Есть ли мобильное приложение?</h4>
+                    <p>В разработке. Ожидайте релиз в ближайшее время.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon"><i class="fas fa-fire"></i></div>
+                        <div class="logo-text">AresCraftX</div>
+                    </div>
+                    <p>Экосистема для творчества, объединяющая лучшие проекты в одном месте.</p>
+                    <div class="footer-cta mt-15">
+                        <a href="auth.html" class="btn btn-secondary">
+                            <i class="fas fa-user-plus"></i> Присоединиться
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Быстрые ссылки</h4>
+                    <a href="#projects">Проекты</a>
+                    <a href="#about">О нас</a>
+                    <a href="#contact">Контакты</a>
+                    <a href="auth.html">Войти / Регистрация</a>
+                    <a href="#">Политика конфиденциальности</a>
+                </div>
+                <div class="footer-social">
+                    <h4>Мы в соцсетях</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                    <div class="newsletter mt-30">
+                        <h4>Подписаться на новости</h4>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Ваш email" required>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AresCraftX. Все права защищены. | С любовью, команда Ares</p>
+                <p class="footer-note">AresCraftX не аффилирован с Mojang Studios. Minecraft является товарным знаком Mojang Studios.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Добавьте перед другими скриптами -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>
