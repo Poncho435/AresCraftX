@@ -595,6 +595,9 @@ class ProjectManager {
                         <button class="btn btn-secondary" data-action="notify">
                             <i class="fas fa-bell"></i> Уведомить о запуске
                         </button>
+                        <button class="btn btn-primary" data-action="more-info">
+                            <i class="fas fa-bell"></i> Открыть
+                        </button>
                     </div>
                 </div>
             </div>
